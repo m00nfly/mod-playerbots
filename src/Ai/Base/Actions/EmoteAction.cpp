@@ -533,33 +533,33 @@ bool EmoteActionBase::ReceiveEmote(Player* source, uint32 emote, bool verbal)
         case TEXT_EMOTE_READY:
             emoteId = EMOTE_ONESHOT_SALUTE;
             textEmote = TEXT_EMOTE_SALUTE;
-            emoteText = "Ready here, too!";
+            emoteText = "我也准备好了！";
             break;
         case TEXT_EMOTE_SHOO:
             emoteId = EMOTE_ONESHOT_KICK;
             textEmote = TEXT_EMOTE_SHOO;
-            emoteText = "Shoo yourself!";
+            emoteText = "你自己走开！";
             break;
         case TEXT_EMOTE_SLAP:
             // case TEXT_EMOTE_SMACK:
             emoteId = EMOTE_ONESHOT_CRY;
             textEmote = TEXT_EMOTE_CRY;
-            emoteText = "What did I do to deserve that?";
+            emoteText = "我做了什么才配得上这个？";
             break;
         case TEXT_EMOTE_STAND:
             emoteId = EMOTE_ONESHOT_NONE;
             textEmote = TEXT_EMOTE_STAND;
-            emoteText = "What? Break time's over? Fine..";
+            emoteText = "什么？休息时间结束了？好吧……";
             break;
         case TEXT_EMOTE_TICKLE:
             emoteId = EMOTE_ONESHOT_LAUGH;
             textEmote = TEXT_EMOTE_GIGGLE;
-            emoteText = "Hey! Stop that!";
+            emoteText = "嘿！别那样！";
             break;
         case TEXT_EMOTE_VIOLIN:
             emoteId = EMOTE_ONESHOT_TALK;
             textEmote = TEXT_EMOTE_SIGH;
-            emoteText = "Har Har.. very funny..";
+            emoteText = "哈哈……真有意思……";
             break;
             // case TEXT_EMOTE_HELPME:
             //     bot->HandleEmoteCommand(EMOTE_ONESHOT_POINT);
@@ -569,13 +569,13 @@ bool EmoteActionBase::ReceiveEmote(Player* source, uint32 emote, bool verbal)
             // case TEXT_EMOTE_LUCK:
             emoteId = EMOTE_ONESHOT_TALK;
             textEmote = TEXT_EMOTE_THANK;
-            emoteText = "Thanks... I'll need it..";
+            emoteText = "谢谢……我会需要它的……";
             break;
         case TEXT_EMOTE_BRANDISH:
             // case TEXT_EMOTE_MERCY:
             emoteId = EMOTE_ONESHOT_BEG;
             textEmote = TEXT_EMOTE_BEG;
-            emoteText = "Please don't kill me!";
+            emoteText = "求你别杀我！";
             break;
         /*case TEXT_EMOTE_BADFEELING:
             bot->HandleEmoteCommand(EMOTE_ONESHOT_QUESTION);
