@@ -112,7 +112,7 @@ bool TogglePetSpellAutoCastAction::Execute(Event /*event*/)
 
     // Debug message if pet spells have been toggled and debug is enabled
     if (toggled && sPlayerbotAIConfig.petChatCommandDebug == 1)
-        botAI->TellMaster("Pet autocast spells have been toggled.");
+        botAI->TellMaster("宠物自动施法已切换.");
 
     return toggled;
 }
@@ -192,19 +192,19 @@ bool SetPetStanceAction::Execute(Event /*event*/)
     {
         case 0:
             react = REACT_PASSIVE;
-            stanceText = "passive (from config)";
+            stanceText = "主动 (来自配置)";
             break;
         case 1:
             react = REACT_DEFENSIVE;
-            stanceText = "defensive (from config)";
+            stanceText = "防御 (来自配置)";
             break;
         case 2:
             react = REACT_AGGRESSIVE;
-            stanceText = "aggressive (from config)";
+            stanceText = "主动 (来自配置)";
             break;
         default:
             react = REACT_DEFENSIVE;
-            stanceText = "defensive (from config, fallback)";
+            stanceText = "防御 (来自配置, 默认值)";
             break;
     }
 
@@ -220,7 +220,7 @@ bool SetPetStanceAction::Execute(Event /*event*/)
 
     // If debug is enabled in config, inform the master of the new stance
     if (sPlayerbotAIConfig.petChatCommandDebug == 1)
-        botAI->TellMaster("Pet stance set to " + stanceText + " (applied to all pets/guardians).");
+        botAI->TellMaster("宠物姿态已设置为 " + stanceText + " (适用于所有宠物/守护着).");
 
     return true;
 }

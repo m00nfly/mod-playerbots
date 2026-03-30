@@ -58,12 +58,12 @@ bool QueryQuestAction::Execute(Event event)
 
         if (bot->GetQuestStatus(questId) == QUEST_STATUS_COMPLETE)
         {
-            out << "|c0000FF00completed|r ---";
+            out << "|c0000FF00已完成|r ---";
             botAI->TellMaster(out);
         }
         else
         {
-            out << "|c00FF0000not completed|r ---";
+            out << "|c00FF0000未完成|r ---";
             botAI->TellMaster(out);
             TellObjectives(questId);
         }
@@ -86,7 +86,7 @@ bool QueryQuestAction::Execute(Event event)
                 uint32 apoints = dest->getPoints().size();
 
                 out << round(dest->distanceTo(&botPos));
-                out << " to " << dest->getTitle();
+                out << " 到 " << dest->getTitle();
                 out << " " << apoints;
 
                 if (apoints < tpoints)
@@ -95,7 +95,7 @@ bool QueryQuestAction::Execute(Event event)
                 out << " points.";
 
                 if (!dest->isActive(bot))
-                    out << " not active";
+                    out << " 未激活";
 
                 botAI->TellMaster(out);
 
@@ -116,7 +116,7 @@ void QueryQuestAction::TellObjectives(uint32 questId)
     // Checks if the questTemplate is valid
     if (!questTemplate)
     {
-        botAI->TellMaster("Quest template not found.");
+        botAI->TellMaster("任务模版未找到.");
         return;
     }
 

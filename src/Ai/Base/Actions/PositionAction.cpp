@@ -12,17 +12,17 @@
 void TellPosition(PlayerbotAI* botAI, std::string const name, PositionInfo pos)
 {
     std::ostringstream out;
-    out << "Position " << name;
+    out << "地点 " << name;
 
     if (pos.isSet())
     {
         float x = pos.x;
         float y = pos.y;
         Map2ZoneCoordinates(x, y, botAI->GetBot()->GetZoneId());
-        out << " is set to " << x << "," << y;
+        out << " 已设定为 " << x << "," << y;
     }
     else
-        out << " is not set";
+        out << " 未设置";
 
     botAI->TellMaster(out);
 }
@@ -52,7 +52,7 @@ bool PositionAction::Execute(Event event)
     std::vector<std::string> params = split(param, ' ');
     if (params.size() != 2)
     {
-        botAI->TellMaster("Whisper position <name> ?/set/reset");
+        botAI->TellMaster("私聊 position <name> ?/set/reset");
         return false;
     }
 
@@ -72,7 +72,7 @@ bool PositionAction::Execute(Event event)
         posMap[name] = pos;
 
         std::ostringstream out;
-        out << "Position " << name << " is set";
+        out << "位置 " << name << " 已设定";
         botAI->TellMaster(out);
         return true;
     }
@@ -83,7 +83,7 @@ bool PositionAction::Execute(Event event)
         posMap[name] = pos;
 
         std::ostringstream out;
-        out << "Position " << name << " is set";
+        out << "位置 " << name << " 已设定";
         botAI->TellMaster(out);
         return true;
     }
@@ -94,7 +94,7 @@ bool PositionAction::Execute(Event event)
         posMap[name] = pos;
 
         std::ostringstream out;
-        out << "Position " << name << " is reset";
+        out << "位置 " << name << " 已重置";
         botAI->TellMaster(out);
         return true;
     }
@@ -108,7 +108,7 @@ bool MoveToPositionAction::Execute(Event /*event*/)
     if (!pos.isSet())
     {
         std::ostringstream out;
-        out << "Position " << qualifier << " is not set";
+        out << "位置 " << qualifier << " 未设置";
         botAI->TellMaster(out);
         return false;
     }
@@ -169,7 +169,7 @@ bool ReturnToStayPositionAction::isPossible()
         const float distance = bot->GetDistance(stayPosition.x, stayPosition.y, stayPosition.z);
         if (distance > sPlayerbotAIConfig.reactDistance)
         {
-            botAI->TellMaster("The stay position is too far to return. I am going to stay where I am now");
+            botAI->TellMaster("之前的停留地点离太远了，无法返回，我将呆在原地");
 
             // Set the stay position to current position
             stayPosition.Set(bot->GetPositionX(), bot->GetPositionY(), bot->GetPositionZ(), bot->GetMapId());

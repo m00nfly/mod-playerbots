@@ -18,13 +18,13 @@ bool UnlockTradedItemAction::Execute(Event /*event*/)
     Item* lockbox = tradeData->GetItem(TRADE_SLOT_NONTRADED);
     if (!lockbox)
     {
-        botAI->TellError("No item in the Do Not Trade slot.");
+        botAI->TellError("交易栏中没有物品");
         return false;
     }
 
     if (!CanUnlockItem(lockbox))
     {
-        botAI->TellError("Cannot unlock this item.");
+        botAI->TellError("无法解锁此物品");
         return false;
     }
 
@@ -66,7 +66,7 @@ bool UnlockTradedItemAction::CanUnlockItem(Item* item)
             else
             {
                 std::ostringstream out;
-                out << "Lockpicking skill too low (" << botSkill << "/" << requiredSkill << ") to unlock: "
+                out << "开锁技能太低 (" << botSkill << "/" << requiredSkill << ") 无法解锁: "
                     << item->GetTemplate()->Name1;
                 botAI->TellMaster(out.str());
             }
@@ -80,7 +80,7 @@ void UnlockTradedItemAction::UnlockItem(Item* item)
 {
     if (!bot->HasSpell(PICK_LOCK_SPELL_ID))
     {
-        botAI->TellError("Cannot unlock, Pick Lock spell is missing.");
+        botAI->TellError("无法解锁，还没有学会开锁技能!");
         return;
     }
 
@@ -88,11 +88,11 @@ void UnlockTradedItemAction::UnlockItem(Item* item)
     if (botAI->CastSpell(PICK_LOCK_SPELL_ID, bot->GetTrader(), item)) // Unit target is trader
     {
         std::ostringstream out;
-        out << "Picking Lock on traded item: " << item->GetTemplate()->Name1;
+        out << "正在解锁交易物品: " << item->GetTemplate()->Name1;
         botAI->TellMaster(out.str());
     }
     else
     {
-        botAI->TellError("Failed to cast Pick Lock.");
+        botAI->TellError("开锁失败");
     }
 }

@@ -54,7 +54,7 @@ void AutoMaintenanceOnLevelupAction::AutoLearnSpell()
     {
         std::string const temp = out.str();
         out.seekp(0);
-        out << "Learned spells: ";
+        out << "学会法术: ";
         out << temp;
         out.seekp(-2, out.cur);
         out << ".";

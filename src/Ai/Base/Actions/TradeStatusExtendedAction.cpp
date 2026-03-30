@@ -75,7 +75,7 @@ bool TradeStatusExtendedAction::Execute(Event event)
             }
             else
             {
-                botAI->TellMaster("I can't unlock this item.");
+                botAI->TellMaster("我无法解锁这个物品!");
             }
         }
     }

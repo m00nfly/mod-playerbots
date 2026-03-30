@@ -36,7 +36,7 @@ bool RangeAction::Execute(Event event)
     context->GetValue<float>("range", qualifier)->Set(newVal);
 
     std::ostringstream out;
-    out << qualifier << " range set to: " << newVal;
+    out << qualifier << " 范围设定为: " << newVal;
     botAI->TellMaster(out.str());
     return true;
 }
@@ -51,7 +51,7 @@ void RangeAction::PrintRange(std::string const type)
     if (abs(curVal) >= 0.1f)
         out << curVal;
     else
-        out << botAI->GetRange(type) << " (default)";
+        out << botAI->GetRange(type) << " (默认)";
 
     botAI->TellMaster(out.str());
 }

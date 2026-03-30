@@ -30,13 +30,13 @@ bool HireAction::Execute(Event /*event*/)
 
     if (charCount >= 10)
     {
-        botAI->TellMaster("You already have the maximum number of characters");
+        botAI->TellMaster("你拥有的角色数量已达上限");
         return false;
     }
 
     if (bot->GetLevel() > master->GetLevel())
     {
-        botAI->TellMaster("You cannot hire higher level characters than you");
+        botAI->TellMaster("你不能雇佣比你等级更高的角色");
         return false;
     }
 
@@ -46,13 +46,13 @@ bool HireAction::Execute(Event /*event*/)
     if (discount < moneyReq)
     {
         std::ostringstream out;
-        out << "You cannot hire me - I barely know you. Make sure you have at least " << chat->formatMoney(moneyReq)
-            << " as a trade discount";
+        out << "您不能雇佣我 - 我几乎不认识你. 请确保您至少拥有 " << chat->formatMoney(moneyReq)
+            << " 用于交易抵扣.";
         botAI->TellMaster(out.str());
         return false;
     }
 
-    botAI->TellMaster("I will join you at your next relogin");
+    botAI->TellMaster("我会在你下次重新登录时加入你.");
 
     bot->SetMoney(moneyReq);
     RandomPlayerbotMgr::instance().Remove(bot);

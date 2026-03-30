@@ -17,11 +17,11 @@ bool LogLevelAction::Execute(Event event)
     if (param != "?")
     {
         value->Set(string2logLevel(param));
-        out << "My log level set to " << logLevel2string(value->Get());
+        out << "日志级别设置为 " << logLevel2string(value->Get());
     }
     else
     {
-        out << "My log level is " << logLevel2string(value->Get());
+        out << "当前日志级别 " << logLevel2string(value->Get());
     }
 
     botAI->TellMaster(out);

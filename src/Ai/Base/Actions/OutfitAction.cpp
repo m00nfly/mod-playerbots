@@ -17,9 +17,9 @@ bool OutfitAction::Execute(Event event)
     if (param == "?")
     {
         List();
-        botAI->TellMaster("outfit <name> +[item] to add items");
-        botAI->TellMaster("outfit <name> -[item] to remove items");
-        botAI->TellMaster("outfit <name> equip/replace to equip items");
+        botAI->TellMaster("outfit <name> +[item] 添加物品到套装");
+        botAI->TellMaster("outfit <name> -[item] 从套装移除物品");
+        botAI->TellMaster("outfit <name> equip/replace 穿上/替换套装装备");
     }
     else
     {
@@ -30,7 +30,7 @@ bool OutfitAction::Execute(Event event)
             Save(name, items);
 
             std::ostringstream out;
-            out << "Setting outfit " << name << " as " << param;
+            out << "已将 " << param << " 保存为 " << name << " 套装";
             botAI->TellMaster(out);
             return true;
         }
@@ -48,7 +48,7 @@ bool OutfitAction::Execute(Event event)
         if (command == "equip")
         {
             std::ostringstream out;
-            out << "Equipping outfit " << name;
+            out << "装备 " << name << " 套装";
             botAI->TellMaster(out);
 
             EquipItems(outfit);
@@ -57,7 +57,7 @@ bool OutfitAction::Execute(Event event)
         else if (command == "replace")
         {
             std::ostringstream out;
-            out << "Replacing current equip with outfit " << name;
+            out << "替换为 " << name << "套装";
             botAI->TellMaster(out);
 
             for (uint8 slot = EQUIPMENT_SLOT_START; slot < EQUIPMENT_SLOT_END; slot++)
@@ -82,7 +82,7 @@ bool OutfitAction::Execute(Event event)
         else if (command == "reset")
         {
             std::ostringstream out;
-            out << "Resetting outfit " << name;
+            out << "重置 " << name << " 套装";
             botAI->TellMaster(out);
 
             Save(name, ItemIds());
@@ -91,7 +91,7 @@ bool OutfitAction::Execute(Event event)
         else if (command == "update")
         {
             std::ostringstream out;
-            out << "Updating with current items outfit " << name;
+            out << "更新当前穿戴的装备为 " << name << " 套装";
             botAI->TellMaster(out);
 
             Update(name);
@@ -111,12 +111,12 @@ bool OutfitAction::Execute(Event event)
                 if (j != outfit.end())
                     outfit.erase(j);
 
-                out << " removed from ";
+                out << " 已移除自 ";
             }
             else
             {
                 outfit.insert(itemid);
-                out << " added to ";
+                out << " 已添加到 ";
             }
 
             out << name;

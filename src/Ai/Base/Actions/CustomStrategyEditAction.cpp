@@ -31,7 +31,7 @@ bool CustomStrategyEditAction::Execute(Event event)
 
 bool CustomStrategyEditAction::PrintHelp()
 {
-    botAI->TellMaster("=== Custom strategies ===");
+    botAI->TellMaster("=== 自定义策略 ===");
 
     uint32 owner = botAI->GetBot()->GetGUID().GetCounter();
 
@@ -48,7 +48,7 @@ bool CustomStrategyEditAction::PrintHelp()
         } while (result->NextRow());
     }
 
-    botAI->TellMaster("Usage: cs <name> <idx> <command>");
+    botAI->TellMaster("用法: cs <name> <idx> <command>");
     return false;
 }
 

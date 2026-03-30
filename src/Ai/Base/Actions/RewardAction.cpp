@@ -39,7 +39,7 @@ bool RewardAction::Execute(Event event)
     if (groupLeaderUnit && Reward(itemId, groupLeaderUnit))
         return true;
 
-    botAI->TellError("Cannot talk to quest giver");
+    botAI->TellError("无法与任务NPC交谈");
     return false;
 }
 
@@ -69,7 +69,7 @@ bool RewardAction::Reward(uint32 itemId, Object* questGiver)
                     std::string const itemName = pRewardItem->Name1;
 
                     std::ostringstream out;
-                    out << chat->FormatItem(pRewardItem) << " rewarded";
+                    out << chat->FormatItem(pRewardItem) << " 已领取奖励";
                     botAI->TellMaster(out);
 
                     return true;

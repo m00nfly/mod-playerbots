@@ -160,7 +160,7 @@ bool QuestAction::CompleteQuest(Player* player, uint32 entry)
         LOG_INFO("playerbots", "{} => Quest [ {} ] completed", bot->GetName(), pQuest->GetTitle());
         bot->Say("Quest [ " + text_quest + " ] completed", LANG_UNIVERSAL);
     }
-    botAI->TellMasterNoFacing("Quest completed " + text_quest);
+    botAI->TellMasterNoFacing("任务完成 " + text_quest);
 
     player->CompleteQuest(entry);
 
@@ -188,7 +188,7 @@ bool QuestAction::ProcessQuests(WorldObject* questGiver)
     {
         //if (botAI->HasStrategy("debug", BotState::BOT_STATE_COMBAT) || botAI->HasStrategy("debug", BotState::BOT_STATE_NON_COMBAT))
 
-        botAI->TellError("Cannot talk to quest giver");
+        botAI->TellError("无法与任务发布者对话");
         return false;
     }
 
@@ -220,18 +220,18 @@ bool QuestAction::AcceptQuest(Quest const* quest, ObjectGuid questGiver)
     uint32 questId = quest->GetQuestId();
 
     if (bot->GetQuestStatus(questId) == QUEST_STATUS_COMPLETE)
-        out << "Already completed";
+        out << "已完成";
     else if (!bot->CanTakeQuest(quest, false))
     {
         if (!bot->SatisfyQuestStatus(quest, false))
-            out << "Already on";
+            out << "已接受";
         else
-            out << "Can't take";
+            out << "无法接受";
     }
     else if (!bot->SatisfyQuestLog(false))
-        out << "Quest log is full";
+        out << "任务日志已满了";
     else if (!bot->CanAddQuest(quest, false))
-        out << "Bags are full";
+        out << "背包满了";
     else
     {
         WorldPacket p(CMSG_QUESTGIVER_ACCEPT_QUEST);
@@ -250,11 +250,11 @@ bool QuestAction::AcceptQuest(Quest const* quest, ObjectGuid questGiver)
         if (bot->GetQuestStatus(questId) != QUEST_STATUS_NONE && bot->GetQuestStatus(questId) != QUEST_STATUS_REWARDED)
         {
             BroadcastHelper::BroadcastQuestAccepted(botAI, bot, quest);
-            out << "Accepted " << chat->FormatQuest(quest);
+            out << "已接受 " << chat->FormatQuest(quest);
             botAI->TellMaster(out);
             return true;
         }
-        out << "Cannot accept";
+        out << "无法接受";
     }
 
     out << " " << chat->FormatQuest(quest);
@@ -288,7 +288,7 @@ bool QuestUpdateCompleteAction::Execute(Event event)
             // }
         const auto format = ChatHelper::FormatQuest(qInfo);
         if (botAI->GetMaster())
-            botAI->TellMasterNoFacing("Quest completed " + format);
+            botAI->TellMasterNoFacing("任务完成 " + format);
         BroadcastHelper::BroadcastQuestUpdateComplete(botAI, bot, qInfo);
         botAI->rpgStatistic.questCompleted++;
         // LOG_DEBUG("playerbots", "[New rpg] {} complete quest {}", bot->GetName(), qInfo->GetQuestId());
@@ -451,12 +451,12 @@ bool QuestUpdateFailedTimerAction::Execute(Event event)
     {
         std::map<std::string, std::string> placeholders;
         placeholders["%quest_link"] = botAI->GetChatHelper()->FormatQuest(qInfo);
-        botAI->TellMaster(PlayerbotTextMgr::instance().GetBotText("Failed timer for %quest_link, abandoning", placeholders));
+        botAI->TellMaster(PlayerbotTextMgr::instance().GetBotText("任务 %quest_link 已超时, 自动放弃", placeholders));
         BroadcastHelper::BroadcastQuestUpdateFailedTimer(botAI, bot, qInfo);
     }
     else
     {
-        botAI->TellMaster("Failed timer for " + std::to_string(questId));
+        botAI->TellMaster("任务超时 " + std::to_string(questId));
     }
 
     //drop quest

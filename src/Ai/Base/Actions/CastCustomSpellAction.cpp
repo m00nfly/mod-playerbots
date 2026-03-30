@@ -117,7 +117,7 @@ bool CastCustomSpellAction::Execute(Event event)
     std::ostringstream msg;
     if (!spell)
     {
-        msg << "Unknown spell " << text;
+        msg << "未知法术 " << text;
         botAI->TellError(msg.str());
         return false;
     }
@@ -125,7 +125,7 @@ bool CastCustomSpellAction::Execute(Event event)
     SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spell);
     if (!spellInfo)
     {
-        msg << "Unknown spell " << text;
+        msg << "未知法术 " << text;
         botAI->TellError(msg.str());
         return false;
     }
@@ -141,20 +141,19 @@ bool CastCustomSpellAction::Execute(Event event)
     }
 
     std::ostringstream spellName;
-    spellName << ChatHelper::FormatSpell(spellInfo) << " on ";
 
     if (bot->GetTrader())
-        spellName << "trade item";
+        spellName << "交易物品";
     else if (itemTarget)
         spellName << chat->FormatItem(itemTarget->GetTemplate());
     else if (target == bot)
-        spellName << "self";
+        spellName << "自己";
     else
         spellName << target->GetName();
 
     if (!bot->GetTrader() && !botAI->CanCastSpell(spell, target, true, itemTarget))
     {
-        msg << "Cannot cast " << spellName.str();
+        msg << "我无法向 " << spellName.str() << "施放 " << ChatHelper::FormatSpell(spellInfo);
         botAI->TellError(msg.str());
         return false;
     }
@@ -162,21 +161,21 @@ bool CastCustomSpellAction::Execute(Event event)
     bool result = spell ? botAI->CastSpell(spell, target, itemTarget) : botAI->CastSpell(text, target, itemTarget);
     if (result)
     {
-        msg << "Casting " << spellName.str();
+        msg << "正在施放 " << spellName.str();
 
         if (castCount > 1)
         {
             std::ostringstream cmd;
             cmd << castString(target) << " " << text << " " << (castCount - 1);
             botAI->HandleCommand(CHAT_MSG_WHISPER, cmd.str(), master);
-            msg << "|cffffff00(x" << (castCount - 1) << " left)|r";
+            msg << "|cffffff00(x剩余 " << (castCount - 1) << " 次)|r";
         }
 
         botAI->TellMasterNoFacing(msg.str());
     }
     else
     {
-        msg << "Cast " << spellName.str() << " is failed";
+        msg << "施放 " << spellName.str() << " 失败";
         botAI->TellError(msg.str());
     }
 

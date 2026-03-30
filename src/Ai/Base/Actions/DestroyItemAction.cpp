@@ -30,7 +30,7 @@ void DestroyItemAction::DestroyItem(FindItemVisitor* visitor)
     for (Item* item : items)
     {
         std::ostringstream out;
-        out << chat->FormatItem(item->GetTemplate()) << " destroyed";
+        out << chat->FormatItem(item->GetTemplate()) << " 已摧毁";
         botAI->TellMaster(out);
 
         bot->DestroyItem(item->GetBagSlot(), item->GetSlot(), true);

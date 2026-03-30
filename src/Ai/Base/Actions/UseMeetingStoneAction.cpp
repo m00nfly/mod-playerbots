@@ -36,7 +36,7 @@ bool UseMeetingStoneAction::Execute(Event event)
 
     if (bot->IsInCombat())
     {
-        botAI->TellError("I am in combat");
+        botAI->TellError("我正在战斗中");
         return false;
     }
 
@@ -73,13 +73,13 @@ bool SummonAction::Execute(Event /*event*/)
 
     if (SummonUsingGos(master, bot, true) || SummonUsingNpcs(master, bot, true))
     {
-        botAI->TellMasterNoFacing("Hello!");
+        botAI->TellMasterNoFacing("你好啊!");
         return true;
     }
 
     if (SummonUsingGos(bot, master, true) || SummonUsingNpcs(bot, master, true))
     {
-        botAI->TellMasterNoFacing("Welcome!");
+        botAI->TellMasterNoFacing("欢迎!");
         return true;
     }
 
@@ -99,7 +99,7 @@ bool SummonAction::SummonUsingGos(Player* summoner, Player* player, bool preserv
             return Teleport(summoner, player, preserveAuras);
     }
 
-    botAI->TellError(summoner == bot ? "There is no meeting stone nearby" : "There is no meeting stone near you");
+    botAI->TellError(summoner == bot ? "附近没有集合石" : "你的附近没有集合石");
     return false;
 }
 
@@ -119,13 +119,13 @@ bool SummonAction::SummonUsingNpcs(Player* summoner, Player* player, bool preser
         {
             if (!player->HasItemCount(6948, 1, false))
             {
-                botAI->TellError(player == bot ? "I have no hearthstone" : "You have no hearthstone");
+                botAI->TellError(player == bot ? "我没有炉石" : "你没有炉石");
                 return false;
             }
 
             if (player->HasSpellCooldown(8690))
             {
-                botAI->TellError(player == bot ? "My hearthstone is not ready" : "Your hearthstone is not ready");
+                botAI->TellError(player == bot ? "我的炉石还没有准备好" : "你的炉石还没有准备好");
                 return false;
             }
 
@@ -141,7 +141,7 @@ bool SummonAction::SummonUsingNpcs(Player* summoner, Player* player, bool preser
         }
     }
 
-    botAI->TellError(summoner == bot ? "There are no innkeepers nearby" : "There are no innkeepers near you");
+    botAI->TellError(summoner == bot ? "附近没有旅店老板" : "你的附近没有旅店老板");
     return false;
 }
 
@@ -153,7 +153,7 @@ bool SummonAction::Teleport(Player* summoner, Player* player, bool preserveAuras
 
     if (player->GetVehicle())
     {
-        botAI->TellError("You cannot summon me while I'm on a vehicle");
+        botAI->TellError("你不能召唤正在载具上的我");
         return false;
     }
 
@@ -174,20 +174,20 @@ bool SummonAction::Teleport(Player* summoner, Player* player, bool preserveAuras
 
                 if (summoner->IsInCombat() && !sPlayerbotAIConfig.allowSummonInCombat)
                 {
-                    botAI->TellError("You cannot summon me while you're in combat");
+                    botAI->TellError("你无法在战斗状态中召唤我");
                     return false;
                 }
 
                 if (!summoner->IsAlive() && !sPlayerbotAIConfig.allowSummonWhenMasterIsDead)
                 {
-                    botAI->TellError("You cannot summon me while you're dead");
+                    botAI->TellError("你无法在死亡状态下召唤我");
                     return false;
                 }
 
                 if (bot->isDead() && !bot->HasPlayerFlag(PLAYER_FLAGS_GHOST) &&
                     !sPlayerbotAIConfig.allowSummonWhenBotIsDead)
                 {
-                    botAI->TellError("You cannot summon me while I'm dead, you need to release my spirit first");
+                    botAI->TellError("你无法召唤已死亡的我，请先释放我的灵魂");
                     return false;
                 }
 
@@ -199,7 +199,7 @@ bool SummonAction::Teleport(Player* summoner, Player* player, bool preserveAuras
                 {
                     bot->ResurrectPlayer(1.0f, false);
                     bot->SpawnCorpseBones();
-                    botAI->TellMasterNoFacing("I live, again!");
+                    botAI->TellMasterNoFacing("我复活了!");
                     botAI->GetAiObjectContext()->GetValue<GuidVector>("prioritized targets")->Reset();
                 }
 
@@ -229,6 +229,6 @@ bool SummonAction::Teleport(Player* summoner, Player* player, bool preserveAuras
     }
 
     if (summoner != player)
-         botAI->TellError("Not enough place to summon");
+         botAI->TellError("没有足够的空间进行召唤");
     return false;
 }

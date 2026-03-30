@@ -20,33 +20,33 @@ bool TellLosAction::Execute(Event event)
 
     if (param.empty() || param == "targets")
     {
-        ListUnits("--- Targets ---", *context->GetValue<GuidVector>("possible targets"));
-        ListUnits("--- Targets (All) ---", *context->GetValue<GuidVector>("all targets"));
+        ListUnits("--- 攻击目标 ---", *context->GetValue<GuidVector>("possible targets"));
+        ListUnits("--- 所有目标 ---", *context->GetValue<GuidVector>("all targets"));
     }
 
     if (param.empty() || param == "npcs")
     {
-        ListUnits("--- NPCs ---", *context->GetValue<GuidVector>("nearest npcs"));
+        ListUnits("--- NPC ---", *context->GetValue<GuidVector>("nearest npcs"));
     }
 
     if (param.empty() || param == "corpses")
     {
-        ListUnits("--- Corpses ---", *context->GetValue<GuidVector>("nearest corpses"));
+        ListUnits("--- 尸体 ---", *context->GetValue<GuidVector>("nearest corpses"));
     }
 
     if (param.empty() || param == "gos" || param == "game objects")
     {
-        ListGameObjects("--- Game objects ---", *context->GetValue<GuidVector>("nearest game objects"));
+        ListGameObjects("--- 游戏物体 ---", *context->GetValue<GuidVector>("nearest game objects"));
     }
 
     if (param.empty() || param == "players")
     {
-        ListUnits("--- Friendly players ---", *context->GetValue<GuidVector>("nearest friendly players"));
+        ListUnits("--- 友方玩家 ---", *context->GetValue<GuidVector>("nearest friendly players"));
     }
 
     if (param.empty() || param == "triggers")
     {
-        ListUnits("--- Triggers ---", *context->GetValue<GuidVector>("possible triggers"));
+        ListUnits("--- 触发器 ---", *context->GetValue<GuidVector>("possible triggers"));
     }
 
     return true;
@@ -77,8 +77,8 @@ void TellLosAction::ListGameObjects(std::string const title, GuidVector gos)
 
 bool TellAuraAction::Execute(Event /*event*/)
 {
-    botAI->TellMaster("--- Auras ---");
-    sLog->outMessage("playerbot", LOG_LEVEL_DEBUG, "--- Auras ---");
+    botAI->TellMaster("--- 光环 ---");
+    sLog->outMessage("playerbot", LOG_LEVEL_DEBUG, "--- 光环 ---");
     Unit::AuraApplicationMap& map = bot->GetAppliedAuras();
     for (Unit::AuraApplicationMap::iterator i = map.begin(); i != map.end(); ++i)
     {
@@ -103,10 +103,10 @@ bool TellAuraAction::Execute(Event /*event*/)
                              " isArea: " + std::to_string(is_area) + " duration: " + std::to_string(duration) +
                              " spellId: " + std::to_string(spellId) + " isPositive: " + std::to_string(isPositive));
 
-        botAI->TellMaster("Info of Aura - name: " + auraName + " caster: " + caster_name + " type: " +
-                          std::to_string(type) + " owner: " + owner_name + " distance: " + std::to_string(distance) +
-                          " isArea: " + std::to_string(is_area) + " duration: " + std::to_string(duration) +
-                          " spellId: " + std::to_string(spellId) + " isPositive: " + std::to_string(isPositive));
+        botAI->TellMaster("光环信息 - 名称: " + auraName + " 施法者: " + caster_name + " 类型: " +
+                          std::to_string(type) + " 所有者: " + owner_name + " 距离: " + std::to_string(distance) +
+                          " 区域: " + std::to_string(is_area) + " 持续时间: " + std::to_string(duration) +
+                          " 法术ID: " + std::to_string(spellId) + " 是否未正面: " + std::to_string(isPositive));
 
         if (type == DYNOBJ_AURA_TYPE)
         {
@@ -119,9 +119,9 @@ bool TellAuraAction::Execute(Event /*event*/)
                                  " radius: " + std::to_string(radius) + " spell id: " + std::to_string(spellId) +
                                  " duration: " + std::to_string(duration));
 
-            botAI->TellMaster(std::string("Info of DynamicObject -") + " name: " + dyn_owner->GetName() +
-                              " radius: " + std::to_string(radius) + " spell id: " + std::to_string(spellId) +
-                              " duration: " + std::to_string(duration));
+            botAI->TellMaster(std::string("动态物体信息 -") + " 名称: " + dyn_owner->GetName() +
+                              " 半径: " + std::to_string(radius) + " 法术ID: " + std::to_string(spellId) +
+                              " 持续时间: " + std::to_string(duration));
         }
     }
     return true;
@@ -130,7 +130,7 @@ bool TellAuraAction::Execute(Event /*event*/)
 bool TellEstimatedDpsAction::Execute(Event /*event*/)
 {
     float dps = AI_VALUE(float, "estimated group dps");
-    botAI->TellMaster("Estimated Group DPS: " + std::to_string(dps));
+    botAI->TellMaster("估计团队DPS: " + std::to_string(dps));
     return true;
 }
 
@@ -146,7 +146,7 @@ bool TellCalculateItemAction::Execute(Event event)
     float score = calculator.CalculateItem(item.itemId, item.randomPropertyId);
 
     std::ostringstream out;
-    out << "Calculated score of " << chat->FormatItem(proto) << " : " << score;
+    out << "计算得分 " << chat->FormatItem(proto) << " : " << score;
     botAI->TellMasterNoFacing(out.str());
     return true;
 }

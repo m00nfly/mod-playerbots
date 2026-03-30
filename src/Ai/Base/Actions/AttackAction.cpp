@@ -38,7 +38,7 @@ bool AttackMyTargetAction::Execute(Event /*event*/)
     if (!guid)
     {
         if (verbose)
-            botAI->TellError("You have no target");
+            botAI->TellError("你没有选择目标");
 
         return false;
     }
@@ -64,7 +64,7 @@ bool AttackAction::Attack(Unit* target, bool /*with_pet*/ /*true*/)
         bot->HasUnitState(UNIT_STATE_IN_FLIGHT))
     {
         if (verbose)
-            botAI->TellError("I cannot attack in flight");
+            botAI->TellError("我无法在飞行中发起攻击");
 
         return false;
     }
@@ -72,7 +72,7 @@ bool AttackAction::Attack(Unit* target, bool /*with_pet*/ /*true*/)
     if (!target)
     {
         if (verbose)
-            botAI->TellError("I have no target");
+            botAI->TellError("我没有目标");
 
         return false;
     }
@@ -80,7 +80,7 @@ bool AttackAction::Attack(Unit* target, bool /*with_pet*/ /*true*/)
     if (!target->IsInWorld())
     {
         if (verbose)
-            botAI->TellError(std::string(target->GetName()) + " is no longer in the world.");
+            botAI->TellError(std::string(target->GetName()) + " 已不在当前世界中");
 
         return false;
     }
@@ -92,7 +92,7 @@ bool AttackAction::Attack(Unit* target, bool /*with_pet*/ /*true*/)
         sPlayerbotAIConfig.IsPvpProhibited(target->GetZoneId(), target->GetAreaId())))
     {
         if (verbose)
-            botAI->TellError("I cannot attack other players in PvP prohibited areas.");
+            botAI->TellError("我无法攻击其它玩家，这里是PVP禁止区域.");
 
         return false;
     }
@@ -100,7 +100,7 @@ bool AttackAction::Attack(Unit* target, bool /*with_pet*/ /*true*/)
     if (bot->IsFriendlyTo(target))
     {
         if (verbose)
-            botAI->TellError(std::string(target->GetName()) + " is friendly to me.");
+            botAI->TellError(std::string(target->GetName()) + " 是友善的");
 
         return false;
     }
@@ -108,7 +108,7 @@ bool AttackAction::Attack(Unit* target, bool /*with_pet*/ /*true*/)
     if (target->isDead())
     {
         if (verbose)
-            botAI->TellError(std::string(target->GetName()) + " is dead.");
+            botAI->TellError(std::string(target->GetName()) + " 死亡了.");
 
         return false;
     }
@@ -116,7 +116,7 @@ bool AttackAction::Attack(Unit* target, bool /*with_pet*/ /*true*/)
     if (!bot->IsWithinLOSInMap(target))
     {
         if (verbose)
-            botAI->TellError(std::string(target->GetName()) + " is not in my sight.");
+            botAI->TellError(std::string(target->GetName()) + " 不在我的视野中.");
 
         return false;
     }
@@ -124,7 +124,7 @@ bool AttackAction::Attack(Unit* target, bool /*with_pet*/ /*true*/)
     if (sameTarget && inCombat && sameAttackMode)
     {
         if (verbose)
-            botAI->TellError("I am already attacking " + std::string(target->GetName()) + ".");
+            botAI->TellError("我已准备好攻击 " + std::string(target->GetName()) + ".");
 
         return false;
     }
@@ -132,7 +132,7 @@ bool AttackAction::Attack(Unit* target, bool /*with_pet*/ /*true*/)
     if (!bot->IsValidAttackTarget(target))
     {
         if (verbose)
-            botAI->TellError("I cannot attack an invalid target.");
+            botAI->TellError("我无法攻击无效目标.");
 
         return false;
     }

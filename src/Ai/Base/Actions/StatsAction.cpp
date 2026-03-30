@@ -69,7 +69,7 @@ void StatsAction::ListBagSlots(std::ostringstream& out)
     if (totalfree < total / 4)
         color = "ffff0000";
 
-    out << "|h|c" << color << totalfree << "/" << total << "|h|cffffffff Bag";
+    out << "|h|c" << color << totalfree << "/" << total << "|h|cffffffff 个背包";
 }
 
 void StatsAction::ListXP(std::ostringstream& out)

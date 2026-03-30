@@ -344,7 +344,7 @@ void ChooseTravelTargetAction::ReportTravelTarget(TravelTarget* newTarget, Trave
     {
         if (!oldTarget->getDestination() || oldTarget->getDestination()->getName() != "NullTravelDestination")
         {
-            botAI->TellMaster("No where to travel. Idling a bit.");
+            botAI->TellMaster("没地方可去了。先歇会儿。");
         }
     }
 }

@@ -92,7 +92,7 @@ bool DebugAction::Execute(Event event)
         }
         else
         {
-            botAI->TellMasterNoFacing("Destination " + destination + " not found.");
+            botAI->TellMasterNoFacing("目标 " + destination + " 未找到.");
             return true;
         }
     }
@@ -104,7 +104,7 @@ bool DebugAction::Execute(Event event)
 
         if (!quest)
         {
-            botAI->TellMasterNoFacing("Quest " + text.substr(6) + " not found.");
+            botAI->TellMasterNoFacing("任务 " + text.substr(6) + " 未找到.");
             return false;
         }
 

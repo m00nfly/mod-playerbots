@@ -215,7 +215,7 @@ bool BuyAction::Execute(Event event)
 
     if (!vendored)
     {
-        botAI->TellError("There are no vendors nearby");
+        botAI->TellError("附近没有商人");
         return false;
     }
 

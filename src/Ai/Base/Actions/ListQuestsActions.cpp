@@ -44,20 +44,20 @@ void ListQuestsAction::ListQuests(QuestListFilter filter, QuestTravelDetail trav
     bool showCompleted = filter & QUEST_LIST_FILTER_COMPLETED;
 
     if (showIncompleted)
-        botAI->TellMaster("--- Incompleted quests ---");
+        botAI->TellMaster("--- 进行中任务 ---");
 
     uint32 incompleteCount = ListQuests(false, !showIncompleted, travelDetail);
 
     if (showCompleted)
-        botAI->TellMaster("--- Completed quests ---");
+        botAI->TellMaster("--- 已完成任务 ---");
 
     uint32 completeCount = ListQuests(true, !showCompleted, travelDetail);
 
-    botAI->TellMaster("--- Summary ---");
+    botAI->TellMaster("--- 概要 ---");
 
     std::ostringstream out;
-    out << "Total: " << (completeCount + incompleteCount) << " / 25 (incompleted: " << incompleteCount
-        << ", completed: " << completeCount << ")";
+    out << "共计: " << (completeCount + incompleteCount) << " / 25 (进行中: " << incompleteCount
+        << ", 已完成: " << completeCount << ")";
     botAI->TellMaster(out);
 }
 
@@ -97,8 +97,8 @@ uint32 ListQuestsAction::ListQuests(bool completed, bool silent, QuestTravelDeta
                 if (QuestDestination->GetQuestTemplate()->GetQuestId() == questId)
                 {
                     std::ostringstream out;
-                    out << "[Active] traveling " << target->getPosition()->distance(botPos);
-                    out << " to " << QuestDestination->getTitle();
+                    out << "[Active] 从 " << target->getPosition()->distance(botPos);
+                    out << " 前往 " << QuestDestination->getTitle();
                     botAI->TellMaster(out);
                 }
             }

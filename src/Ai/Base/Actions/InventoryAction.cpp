@@ -130,40 +130,40 @@ void InventoryAction::TellItems(std::map<uint32, uint32> itemMap, std::map<uint3
             switch (proto->Class)
             {
                 case ITEM_CLASS_CONSUMABLE:
-                    botAI->TellMaster("--- consumable ---");
+                    botAI->TellMaster("--- 消耗品 ---");
                     break;
                 case ITEM_CLASS_CONTAINER:
-                    botAI->TellMaster("--- container ---");
+                    botAI->TellMaster("--- 容器 ---");
                     break;
                 case ITEM_CLASS_WEAPON:
-                    botAI->TellMaster("--- weapon ---");
+                    botAI->TellMaster("--- 武器 ---");
                     break;
                 case ITEM_CLASS_ARMOR:
-                    botAI->TellMaster("--- armor ---");
+                    botAI->TellMaster("--- 护甲 ---");
                     break;
                 case ITEM_CLASS_REAGENT:
-                    botAI->TellMaster("--- reagent ---");
+                    botAI->TellMaster("--- 材料 ---");
                     break;
                 case ITEM_CLASS_PROJECTILE:
-                    botAI->TellMaster("--- projectile ---");
+                    botAI->TellMaster("--- 弹药 ---");
                     break;
                 case ITEM_CLASS_TRADE_GOODS:
-                    botAI->TellMaster("--- trade goods ---");
+                    botAI->TellMaster("--- 商品 ---");
                     break;
                 case ITEM_CLASS_RECIPE:
-                    botAI->TellMaster("--- recipe ---");
+                    botAI->TellMaster("--- 配方 ---");
                     break;
                 case ITEM_CLASS_QUIVER:
-                    botAI->TellMaster("--- quiver ---");
+                    botAI->TellMaster("--- 箭袋 ---");
                     break;
                 case ITEM_CLASS_QUEST:
-                    botAI->TellMaster("--- quest items ---");
+                    botAI->TellMaster("--- 任务物品 ---");
                     break;
                 case ITEM_CLASS_KEY:
-                    botAI->TellMaster("--- keys ---");
+                    botAI->TellMaster("--- 钥匙 ---");
                     break;
                 case ITEM_CLASS_MISC:
-                    botAI->TellMaster("--- other ---");
+                    botAI->TellMaster("--- 其它 ---");
                     break;
             }
         }
@@ -177,7 +177,7 @@ void InventoryAction::TellItem(ItemTemplate const* proto, uint32 count, bool sou
     std::ostringstream out;
     out << chat->FormatItem(proto, count);
     if (soulbound)
-        out << " (soulbound)";
+        out << " (灵魂绑定)";
 
     botAI->TellMaster(out.str());
 }

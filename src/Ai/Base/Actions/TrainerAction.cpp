@@ -136,7 +136,7 @@ void TrainerAction::Learn(SpellInfo const* spellInfo, uint32 cost, std::ostrings
     {
         if (AI_VALUE2(uint32, "free money for", (uint32)NeedMoneyFor::spells) < cost)
         {
-            out << " - too expensive";
+            out << " - 太贵了";
             return;
         }
 
@@ -148,13 +148,13 @@ void TrainerAction::Learn(SpellInfo const* spellInfo, uint32 cost, std::ostrings
     else
         bot->learnSpell(spellInfo->Id, false);
 
-    out << " - learned";
+    out << " - 学到了";
 }
 
 void TrainerAction::TellHeader(Creature* creature)
 {
     std::ostringstream out;
-    out << "--- Can learn from " << creature->GetName() << " ---";
+    out << "--- 可以从 " << creature->GetName() << " 学习---";
     botAI->TellMaster(out);
 }
 
@@ -163,7 +163,7 @@ void TrainerAction::TellFooter(uint32 totalCost)
     if (totalCost)
     {
         std::ostringstream out;
-        out << "Total cost: " << chat->formatMoney(totalCost);
+        out << "总费用: " << chat->formatMoney(totalCost);
         botAI->TellMaster(out);
     }
 }
@@ -172,11 +172,11 @@ bool MaintenanceAction::Execute(Event /*event*/)
 {
     if (!sPlayerbotAIConfig.maintenanceCommand)
     {
-        botAI->TellError("maintenance command is not allowed, please check the configuration.");
+        botAI->TellError("不允许使用维护指令，请检查配置");
         return false;
     }
 
-    botAI->TellMaster("I'm maintaining");
+    botAI->TellMaster("我正在维护中");
     PlayerbotFactory factory(bot, bot->GetLevel());
 
     if (!botAI->IsAlt())
@@ -283,18 +283,18 @@ bool AutoGearAction::Execute(Event /*event*/)
 {
     if (!sPlayerbotAIConfig.autoGearCommand)
     {
-        botAI->TellError("autogear command is not allowed, please check the configuration.");
+        botAI->TellError("不允许使用自动装备指令，请检查配置");
         return false;
     }
 
     if (!sPlayerbotAIConfig.autoGearCommandAltBots &&
         !sPlayerbotAIConfig.IsInRandomAccountList(bot->GetSession()->GetAccountId()))
     {
-        botAI->TellError("You cannot use autogear on alt bots.");
+        botAI->TellError("你不能在小号机器人上使用自动装备");
         return false;
     }
 
-    botAI->TellMaster("I'm auto gearing");
+    botAI->TellMaster("我在自动装备中");
     uint32 gs = sPlayerbotAIConfig.autoGearScoreLimit == 0
                     ? 0
                     : PlayerbotFactory::CalcMixedGearScore(sPlayerbotAIConfig.autoGearScoreLimit,

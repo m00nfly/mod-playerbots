@@ -28,7 +28,7 @@ bool ReviveFromCorpseAction::Execute(Event event)
         {
             if (!botAI->HasStrategy("follow", BOT_STATE_NON_COMBAT))
             {
-                botAI->TellMasterNoFacing("Welcome back!");
+                botAI->TellMasterNoFacing("欢迎回来!");
                 botAI->ChangeStrategy("+follow,-stay", BOT_STATE_NON_COMBAT);
                 return true;
             }
@@ -322,7 +322,7 @@ bool SpiritHealerAction::Execute(Event /*event*/)
                 bot->SpawnCorpseBones();
                 context->GetValue<Unit*>("current target")->Set(nullptr);
                 bot->SetTarget();
-                botAI->TellMaster("Hello");
+                botAI->TellMaster("你好");
 
                 if (dCount > 20)
                     context->GetValue<uint32>("death count")->Set(0);

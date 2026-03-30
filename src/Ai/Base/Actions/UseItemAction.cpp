@@ -35,7 +35,7 @@ bool UseItemAction::Execute(Event event)
             return UseItemOnGameObject(*items.begin(), *gos.begin());
     }
 
-    botAI->TellError("No items (or game objects) available");
+    botAI->TellError("没有可用的物品!");
     return false;
 }
 
@@ -48,7 +48,7 @@ bool UseItemAction::UseGameObject(ObjectGuid guid)
     go->Use(bot);
 
     std::ostringstream out;
-    out << "Using " << chat->FormatGameobject(go);
+    out << "正在使用 " << chat->FormatGameobject(go);
     botAI->TellMasterNoFacing(out.str());
     return true;
 }
@@ -93,15 +93,15 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
     bool targetSelected = false;
 
     std::ostringstream out;
-    out << "Using " << chat->FormatItem(item->GetTemplate());
+    out << "使用 " << chat->FormatItem(item->GetTemplate());
 
     if (item->GetTemplate()->Stackable > 1)
     {
         uint32 count = item->GetCount();
         if (count > 1)
-            out << " (" << count << " available) ";
+            out << " (" << count << " 个可用) ";
         else
-            out << " (the last one!)";
+            out << " (最后一个!)";
     }
 
     if (goGuid)
@@ -124,7 +124,7 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
         {
             bool fit = SocketItem(itemTarget, item) || SocketItem(itemTarget, item, true);
             if (!fit)
-                botAI->TellMaster("Socket does not fit");
+                botAI->TellMaster("插槽不匹配");
 
             return fit;
         }
@@ -133,7 +133,7 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
             targetFlag = TARGET_FLAG_ITEM;
             packet << targetFlag;
             packet << itemTarget->GetGUID().WriteAsPacked();
-            out << " on " << chat->FormatItem(itemTarget->GetTemplate());
+            out << " 用于 " << chat->FormatItem(itemTarget->GetTemplate());
             targetSelected = true;
         }
     }
@@ -149,7 +149,7 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
             {
                 targetFlag = TARGET_FLAG_UNIT;
                 packet << targetFlag << masterSelection.WriteAsPacked();
-                out << " on " << unit->GetName();
+                out << " 用于 " << unit->GetName();
                 targetSelected = true;
             }
         }
@@ -159,7 +159,7 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
     {
         targetFlag = TARGET_FLAG_UNIT;
         packet << targetFlag << unitTarget->GetGUID().WriteAsPacked();
-        out << " on " << unitTarget->GetName();
+        out << " 用于 " << unitTarget->GetName();
         targetSelected = true;
     }
 
@@ -174,7 +174,7 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
             bot->GetSession()->HandleQuestgiverAcceptQuestOpcode(packet);
 
             std::ostringstream out;
-            out << "Got quest " << chat->FormatQuest(qInfo);
+            out << "获得任务 " << chat->FormatQuest(qInfo);
             botAI->TellMasterNoFacing(out.str());
             return true;
         }
@@ -217,7 +217,7 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
                 targetFlag = TARGET_FLAG_TRADE_ITEM;
                 packet << targetFlag << (uint8)1 << ObjectGuid((uint64)TRADE_SLOT_NONTRADED).WriteAsPacked();
                 targetSelected = true;
-                out << " on traded item";
+                out << " 用于交易的物品";
             }
             else
             {
@@ -246,17 +246,17 @@ bool UseItemAction::UseItem(Item* item, ObjectGuid goGuid, Item* itemTarget, Uni
             targetSelected = true;
 
             if (unitTarget == bot || !unitTarget->IsInWorld() || unitTarget->IsDuringRemoveFromWorld())
-                out << " on self";
+                out << " 用于自己";
             else if (unitTarget->IsHostileTo(bot))
-                out << " on self";
+                out << " 用于自己";
             else
-                out << " on " << unitTarget->GetName();
+                out << " 用于 " << unitTarget->GetName();
         }
         else
         {
             packet << bot->GetPackGUID();
             targetSelected = true;
-            out << " on self";
+            out << " 用于自己";
         }
     }
 
@@ -373,8 +373,8 @@ bool UseItemAction::SocketItem(Item* item, Item* gem, bool replace)
     if (fits)
     {
         std::ostringstream out;
-        out << "Socketing " << chat->FormatItem(item->GetTemplate());
-        out << " with " << chat->FormatItem(gem->GetTemplate());
+        out << "镶嵌 " << chat->FormatItem(item->GetTemplate());
+        out << " 配合 " << chat->FormatItem(gem->GetTemplate());
         botAI->TellMaster(out);
 
         WorldPackets::Item::SocketGems nicePacket(std::move(packet));
