@@ -28,17 +28,17 @@ bool GuildAcceptAction::Execute(Event event)
     uint32 guildId = inviter->GetGuildId();
     if (!guildId)
     {
-        botAI->TellError("You are not in a guild!");
+        botAI->TellError("你不在公会中！");
         accept = false;
     }
     else if (bot->GetGuildId())
     {
-        botAI->TellError("Sorry, I am in a guild already");
+        botAI->TellError("抱歉，我已经有公会了");
         accept = false;
     }
     else if (!botAI->GetSecurity()->CheckLevelFor(PLAYERBOT_SECURITY_INVITE, false, inviter, true))
     {
-        botAI->TellError("Sorry, I don't want to join your guild :(");
+        botAI->TellError("抱歉，我不想加入你的公会 :( ");
         accept = false;
     }
 

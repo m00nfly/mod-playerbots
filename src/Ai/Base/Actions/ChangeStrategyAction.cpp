@@ -45,7 +45,7 @@ bool ChangeNonCombatStrategyAction::Execute(Event event)
     {
         if (text.find("loot") != std::string::npos || text.find("gather") != std::string::npos)
         {
-            botAI->TellError("You can change any strategy except loot and gather");
+            botAI->TellError("你可以更改任何策略，除了loot和gather");
             return false;
         }
     }

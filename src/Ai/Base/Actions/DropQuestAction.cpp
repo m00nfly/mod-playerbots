@@ -51,7 +51,7 @@ bool DropQuestAction::Execute(Event event)
         const Quest* pQuest = sObjectMgr->GetQuestTemplate(entry);
         const std::string text_quest = ChatHelper::FormatQuest(pQuest);
         LOG_INFO("playerbots", "{} => Quest [ {} ] removed", bot->GetName(), pQuest->GetTitle());
-        bot->Say("Quest [ " + text_quest + " ] removed", LANG_UNIVERSAL);
+        bot->Say("任务 [ " + text_quest + " ] 已移除", LANG_UNIVERSAL);
     }
 
     botAI->TellMaster("任务已删除");
@@ -143,7 +143,7 @@ bool CleanQuestLogAction::Execute(Event event)
             {
                 const std::string text_quest = ChatHelper::FormatQuest(quest);
                 LOG_INFO("playerbots", "{} => Quest [ {} ] removed", bot->GetName(), quest->GetTitle());
-                bot->Say("Quest [ " + text_quest + " ] removed", LANG_UNIVERSAL);
+                bot->Say("任务 [ " + text_quest + " ] 已移除", LANG_UNIVERSAL);
             }
 
             if (botAI->HasStrategy("debug rpg", BotState::BOT_STATE_COMBAT))
@@ -234,7 +234,7 @@ void CleanQuestLogAction::DropQuestType(uint8& numQuest, uint8 wantNum, bool isG
         {
             const std::string text_quest = ChatHelper::FormatQuest(quest);
             LOG_INFO("playerbots", "{} => Quest [ {} ] removed", bot->GetName(), quest->GetTitle());
-            bot->Say("Quest [ " + text_quest + " ] removed", LANG_UNIVERSAL);
+            bot->Say("任务 [ " + text_quest + " ] 已移除", LANG_UNIVERSAL);
         }
         botAI->TellMaster("任务" + chat->FormatQuest(quest) + "已移除");
     }

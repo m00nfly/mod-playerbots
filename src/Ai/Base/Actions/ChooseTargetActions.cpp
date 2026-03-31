@@ -177,7 +177,7 @@ bool AttackRtiTargetAction::Execute(Event /*event*/)
         }
     }
     else
-        botAI->TellError("I dont see my rti attack target");
+        botAI->TellError("我看不到我的RTI攻击目标");
 
     return false;
 }

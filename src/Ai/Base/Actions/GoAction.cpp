@@ -185,14 +185,14 @@ bool GoAction::Execute(Event event)
 
         if (map->IsInWater(bot->GetPhaseMask(), x, y, z, bot->GetCollisionHeight()))
         {
-            botAI->TellError("It is in water");
+            botAI->TellError("它在水中");
             return false;
         }
 
         float ground = map->GetHeight(x, y, z + 0.5f);
         if (ground <= INVALID_HEIGHT)
         {
-            botAI->TellError("I can't go there");
+            botAI->TellError("我不能去那里");
             return false;
         }
 
@@ -212,7 +212,7 @@ bool GoAction::Execute(Event event)
         if (ServerFacade::instance().IsDistanceGreaterThan(ServerFacade::instance().GetDistance2d(bot, pos.x, pos.y),
                                                  sPlayerbotAIConfig.reactDistance))
         {
-            botAI->TellError("It is too far away");
+            botAI->TellError("太远了");
             return false;
         }
 

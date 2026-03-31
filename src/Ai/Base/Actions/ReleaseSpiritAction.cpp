@@ -22,7 +22,7 @@ bool ReleaseSpiritAction::Execute(Event event)
     {
         if (!bot->InBattleground())
         {
-            botAI->TellMasterNoFacing("I am not dead, will wait here");
+            botAI->TellMasterNoFacing("我还没死，我会在这里等");
             // -follow in bg is overwriten each tick with +follow
             // +stay in bg causes stuttering effect as bot is cycled between +stay and +follow each tick
             botAI->ChangeStrategy("-follow,+stay", BOT_STATE_NON_COMBAT);
@@ -33,14 +33,14 @@ bool ReleaseSpiritAction::Execute(Event event)
 
     if (bot->GetCorpse() && bot->HasPlayerFlag(PLAYER_FLAGS_GHOST))
     {
-        botAI->TellMasterNoFacing("I am already a spirit");
+        botAI->TellMasterNoFacing("我已经是幽灵了");
         return false;
     }
 
     const WorldPacket& packet = event.getPacket();
     const std::string message = !packet.empty() && packet.GetOpcode() == CMSG_REPOP_REQUEST
-                                ? "Releasing..."
-                                : "Meet me at the graveyard";
+                                ? "正在复活..."
+                                : "到墓地来见我";
     botAI->TellMasterNoFacing(message);
 
     IncrementDeathCount();

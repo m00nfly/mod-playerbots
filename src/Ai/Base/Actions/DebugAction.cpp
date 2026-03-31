@@ -205,7 +205,7 @@ bool DebugAction::Execute(Event event)
             endNode->setLinked(false);
         }
 
-        botAI->TellMasterNoFacing("Node " + name + " created.");
+        botAI->TellMasterNoFacing("节点 " + name + " 已创建。");
 
         TravelNodeMap::instance().setHasToGen();
 
@@ -222,12 +222,12 @@ bool DebugAction::Execute(Event event)
 
         if (startNode->isImportant())
         {
-            botAI->TellMasterNoFacing("Node can not be removed.");
+            botAI->TellMasterNoFacing("此节点不可删除。");
         }
 
         TravelNodeMap::instance().m_nMapMtx.lock();
         TravelNodeMap::instance().removeNode(startNode);
-        botAI->TellMasterNoFacing("Node removed.");
+        botAI->TellMasterNoFacing("节点已删除。");
         TravelNodeMap::instance().m_nMapMtx.unlock();
 
         TravelNodeMap::instance().setHasToGen();

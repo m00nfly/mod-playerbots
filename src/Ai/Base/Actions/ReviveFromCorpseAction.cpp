@@ -297,7 +297,7 @@ bool SpiritHealerAction::Execute(Event /*event*/)
     Corpse* corpse = bot->GetCorpse();
     if (!corpse)
     {
-        botAI->TellError("I am not a spirit");
+        botAI->TellError("我不是灵魂状态");
         return false;
     }
 

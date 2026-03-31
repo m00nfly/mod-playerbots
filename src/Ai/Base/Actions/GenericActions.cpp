@@ -178,7 +178,7 @@ bool SetPetStanceAction::Execute(Event /*event*/)
     // If there are no controlled pets or guardians, notify the player and exit
     if (targets.empty())
     {
-        botAI->TellError("You have no pet or guardian pet.");
+        botAI->TellError("你没有宠物或守护宠物.");
         return false;
     }
 

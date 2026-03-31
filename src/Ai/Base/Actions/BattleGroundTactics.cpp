@@ -4302,7 +4302,7 @@ bool ArenaTactics::Execute(Event /*event*/)
 
                 float x, y, z;
                 target->GetPosition(x, y, z);
-                botAI->TellMasterNoFacing("Repositioning to exit the LoS target!");
+                botAI->TellMasterNoFacing("正在重新定位以脱离视线障碍目标！");
                 return MoveTo(target->GetMapId(), x + frand(-1, +1), y + frand(-1, +1), z, false, true);
             }
         }

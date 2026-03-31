@@ -76,6 +76,6 @@ bool AreaTriggerAction::Execute(Event /*event*/)
     p.rpos(0);
     bot->GetSession()->HandleAreaTriggerOpcode(p);
 
-    botAI->TellMaster("Hi,你好啊！");
+    botAI->TellMaster("嗨，你好啊！");
     return true;
 }

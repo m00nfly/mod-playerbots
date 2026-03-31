@@ -256,7 +256,7 @@ bool MailAction::Execute(Event event)
 
     if (!MailProcessor::FindMailbox(botAI))
     {
-        botAI->TellError("There is no mailbox nearby");
+        botAI->TellError("附近没有邮箱");
         return false;
     }
 

@@ -38,7 +38,7 @@ bool PetitionSignAction::Execute(Event event)
         if (bot->GetArenaTeamId(slot))
         {
             // player is already in an arena team
-            botAI->TellError("Sorry, I am already in such team");
+            botAI->TellError("抱歉，我已经在这样的队伍里了");
             accept = false;
         }
     }
@@ -46,13 +46,13 @@ bool PetitionSignAction::Execute(Event event)
     {
         if (bot->GetGuildId())
         {
-            botAI->TellError("Sorry, I am in a guild already");
+            botAI->TellError("抱歉，我已经在公会中了");
             accept = false;
         }
 
         if (bot->GetGuildIdInvited())
         {
-            botAI->TellError("Sorry, I am invited to a guild already");
+            botAI->TellError("抱歉，我已被邀请加入公会");
             accept = false;
         }
 
@@ -60,7 +60,7 @@ bool PetitionSignAction::Execute(Event event)
         /*if (QueryResult* result = CharacterDatabase.Query("SELECT playerguid FROM petition_sign WHERE player_account =
         {} AND petitionguid = {}'", bot->GetSession()->GetAccountId(), petitionGuid.GetCounter()))
         {
-            botAI->TellError("Sorry, I already signed this pettition");
+            botAI->TellError("抱歉，我已经签过这个请愿书了");
             accept = false;
         }
         */
@@ -88,7 +88,7 @@ bool PetitionSignAction::Execute(Event event)
         WorldPacket data(CMSG_PETITION_SIGN, 20);
         data << petitionGuid << unk;
         bot->GetSession()->HandlePetitionSignOpcode(data);
-        bot->Say("Thanks for the invite!", LANG_UNIVERSAL);
+        bot->Say("感谢邀请！", LANG_UNIVERSAL);
         LOG_INFO("playerbots", "Bot {} <{}> accepts {} invite", bot->GetGUID().ToString().c_str(),
                  bot->GetName().c_str(), isArena ? "Arena" : "Guild");
         return true;

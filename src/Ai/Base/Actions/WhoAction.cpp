@@ -54,7 +54,7 @@ bool WhoAction::Execute(Event event)
         if (!out.str().empty())
             out << ", ";
 
-        out << "playing with " << botAI->GetMaster()->GetName();
+        out << "正在和" << botAI->GetMaster()->GetName() << "一起玩";
     }
 
     std::string const tell = out.str();

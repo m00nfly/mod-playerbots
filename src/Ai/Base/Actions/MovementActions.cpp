@@ -157,7 +157,7 @@ bool MovementAction::MoveToLOS(WorldObject* target, bool ranged)
     if (dest.isSet())
         return MoveTo(dest.mapId, dest.x, dest.y, dest.z);
     else
-        botAI->TellError("All paths not in LOS");
+        botAI->TellError("所有路径都不在视野内");
 
     return false;
 }
@@ -1156,13 +1156,13 @@ bool MovementAction::Follow(Unit* target, float distance, float angle)
         if (bot->isDead() && botAI->GetMaster()->IsAlive())
         {
             bot->ResurrectPlayer(1.0f, false);
-            botAI->TellMasterNoFacing("I live, again!");
+            botAI->TellMasterNoFacing("我又活过来了！");
         }
         else
-            botAI->TellError("I am stuck while following");
+            botAI->TellError("跟随时卡住了");
 
         bot->CombatStop(true);
-        botAI->TellMasterNoFacing("I will there soon.");
+        botAI->TellMasterNoFacing("我很快就会到那里。");
         bot->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_TELEPORTED | AURA_INTERRUPT_FLAG_CHANGE_MAP);
         bot->TeleportTo(target->GetMapId(), target->GetPositionX(), target->GetPositionY(), target->GetPositionZ(),
     target->GetOrientation()); return false;
@@ -1375,7 +1375,7 @@ bool MovementAction::Flee(Unit* target)
 
     if (!IsMovingAllowed())
     {
-        botAI->TellError("I am stuck while fleeing");
+        botAI->TellError("逃跑时卡住了");
         return false;
     }
 
@@ -1528,7 +1528,7 @@ bool MovementAction::Flee(Unit* target)
     float rx, ry, rz;
     if (!manager.CalculateDestination(&rx, &ry, &rz))
     {
-        botAI->TellError("Nowhere to flee");
+        botAI->TellError("无处可逃");
         return false;
     }
 
@@ -2547,7 +2547,7 @@ bool DisperseSetAction::Execute(Event event)
     if (text == "disable")
     {
         RESET_AI_VALUE(float, "disperse distance");
-        botAI->TellMasterNoFacing("Disable disperse");
+        botAI->TellMasterNoFacing("禁用分散");
         return true;
     }
     if (text == "enable" || text == "reset")
